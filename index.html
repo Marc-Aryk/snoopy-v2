@@ -114,18 +114,6 @@
     display: none;
   }
 
-  /* === MUSIC BUTTON === */
-  #playMusicBtn {
-    background: #ffb6b9;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 20px;
-    margin-bottom: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    color: white;
-  }
-
   /* MOBILE RESPONSIVE */
   @media screen and (max-width: 480px) {
     :root {
@@ -146,19 +134,10 @@
       font-size: 16px;
     }
   }
-
 </style>
 </head>
 
 <body>
-
-  <!-- MUSIC BUTTON -->
-  <button id="playMusicBtn">🎵 Play Music</button>
-  <audio id="bgMusic" loop>
-    <source src="JVKE-golden-hour.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
 <div class="container">
 
   <!-- PIXEL SNOOPY -->
@@ -193,7 +172,7 @@ const noMessages = [
   "Okay but… please? 💖"
 ];
 
-// === HELPER: CHECK IF BUTTONS OVERLAP ===
+// HELPER: CHECK IF BUTTONS OVERLAP
 function isOverlapping(el1, el2) {
   const r1 = el1.getBoundingClientRect();
   const r2 = el2.getBoundingClientRect();
@@ -203,9 +182,9 @@ function isOverlapping(el1, el2) {
            r2.bottom < r1.top);
 }
 
-// === MOVE NO BUTTON WITHOUT OVERLAP ===
+// MOVE NO BUTTON WITHOUT OVERLAP
 function moveNoButton() {
-  const maxAttempts = 50; // try max 50 times to find free spot
+  const maxAttempts = 50;
   const maxX = window.innerWidth - noBtn.offsetWidth - 20;
   const maxY = window.innerHeight - noBtn.offsetHeight - 20;
 
@@ -222,15 +201,12 @@ function moveNoButton() {
 
   noBtn.style.position = "absolute";
 
-  // increase YES button gradually
   yesSize += 0.15;
   yesBtn.style.transform = `scale(${yesSize})`;
 
-  // change message
   message.textContent = noMessages[noCount % noMessages.length];
   noCount++;
 
-  // Stop the NO button when YES fills most of the screen
   const yesRect = yesBtn.getBoundingClientRect();
   if (yesRect.width > window.innerWidth * 0.9 ||
       yesRect.height > window.innerHeight * 0.9) {
@@ -239,10 +215,10 @@ function moveNoButton() {
   }
 }
 
-// === NO BUTTON ESCAPE ===
+// NO BUTTON ESCAPE
 noBtn.addEventListener("mouseenter", moveNoButton);
 
-// === YES BUTTON CLICK ===
+// YES BUTTON CLICK
 yesBtn.addEventListener("click", () => {
   message.textContent =
     "YAY!! 💞 I knew you’d say yes! Happy Valentine’s Day 🥰";
@@ -250,48 +226,38 @@ yesBtn.addEventListener("click", () => {
   noBtn.classList.add("hidden");
 });
 
-  /* === PIXEL MAP === */
-  const pixelMap = [
-    [0,2,2,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [2,3,3,2,3,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [2,3,3,3,3,3,2,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,2,3,3,3,2,0,0,0,0,2,1,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,2,3,2,0,0,0,0,2,1,1,1,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,2,0,0,2,2,2,1,1,1,1,1,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,2,1,1,1,1,2,1,1,1,1,2,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,2,2,1,1,1,1,1,2,1,1,1,2,1,2,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,2,2,1,1,1,1,1,1,1,1,1,2,1,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,2,1,1,1,1,1,1,1,1,1,2,1,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,2,1,1,1,1,1,1,1,1,2,1,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,2,2,1,1,1,1,1,1,2,1,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,2,2,2,1,1,2,0,2,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,3,3,3,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,2,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,2,1,1,2,1,2,0,0,0,2,2,0,2,2,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,2,1,1,2,1,2,0,0,2,3,3,2,3,3,2,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,2,1,1,1,2,1,1,2,0,2,3,3,3,3,3,2,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,2,1,1,1,2,1,1,2,0,0,2,3,3,3,2,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,2,1,1,1,1,2,2,0,0,0,0,2,3,2,0,0,0,0,0,0,0,0,0,0,0]
-  ];
+// PIXEL ART
+const pixelMap = [
+  [0,2,2,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [2,3,3,2,3,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [2,3,3,3,3,3,2,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,2,3,3,3,2,0,0,0,0,2,1,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,2,3,2,0,0,0,0,2,1,1,1,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,2,0,0,2,2,2,1,1,1,1,1,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,2,1,1,1,1,2,1,1,1,1,2,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,2,2,1,1,1,1,1,2,1,1,1,2,1,2,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,2,2,1,1,1,1,1,1,1,1,1,2,1,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,2,1,1,1,1,1,1,1,1,1,2,1,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,2,1,1,1,1,1,1,1,1,2,1,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,2,2,1,1,1,1,1,1,2,1,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,2,2,2,1,1,2,0,2,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,3,3,3,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,2,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,2,1,1,2,1,2,0,0,0,2,2,0,2,2,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,2,1,1,2,1,2,0,0,2,3,3,2,3,3,2,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,2,1,1,1,2,1,1,2,0,2,3,3,3,3,3,2,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,2,1,1,1,2,1,1,2,0,0,2,3,3,3,2,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,2,1,1,1,1,2,2,0,0,0,0,2,3,2,0,0,0,0,0,0,0,0,0,0,0]
+];
 
-  const art = document.getElementById("pixelArt");
-  pixelMap.forEach(row => {
-    row.forEach(value => {
-      const pixel = document.createElement("div");
-      pixel.className = `pixel c${value}`;
-      art.appendChild(pixel);
-    });
+const art = document.getElementById("pixelArt");
+pixelMap.forEach(row => {
+  row.forEach(value => {
+    const pixel = document.createElement("div");
+    pixel.className = `pixel c${value}`;
+    art.appendChild(pixel);
   });
-
-  // === PLAY MUSIC BUTTON ===
-  const music = document.getElementById("bgMusic");
-  const playBtn = document.getElementById("playMusicBtn");
-  playBtn.addEventListener("click", () => {
-    music.play();
-    music.volume = 0.3; // soft music
-    playBtn.style.display = "none"; // hide button after play
-  });
-
+});
 </script>
 
 </body>
